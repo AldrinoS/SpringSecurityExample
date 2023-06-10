@@ -1,20 +1,21 @@
 package com.example.springsecurityexample.model;
 
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Collection;
 
-@Document("user")
+@Entity(name = "user_details")
 public class User implements UserDetails {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String username;
     private String password;
+
+    public User() {
+    }
 
     public User(Integer id, String username, String password) {
         this.id = id;
