@@ -1,6 +1,7 @@
 package com.example.springsecurityexample.controller;
 
 import com.example.springsecurityexample.config.JwtUtility;
+import com.example.springsecurityexample.exception.ApiRequestException;
 import com.example.springsecurityexample.model.JwtRequest;
 import com.example.springsecurityexample.model.JwtResponse;
 import com.example.springsecurityexample.model.User;
@@ -58,7 +59,7 @@ public class HelloRestController {
                     new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
             );
         } catch (Exception e) {
-            throw new Exception("Invalid Credentials");
+            throw new ApiRequestException("Invalid Credentials", e);
         }
 
         final UserDetails userDetails = userService.loadUserByUsername(request.getUsername());
